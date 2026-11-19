@@ -12,7 +12,11 @@ integration of [Drive Assist](https://github.com/SuspiciousRepair/drive_assist)
 ## How the car uses it
 
 1. In Drive Assist, tap **Install**. The car downloads `manifest.json` and the
-   files in `apps/` from this repo.
+   files in `apps/` from this repo, from **one commit pinned in Drive Assist**,
+   and checks the SHA-256 of each file against the hashes pinned there. A
+   file that does not match stops the install, and nothing changes. So a
+   change here reaches cars only with a Drive Assist release that pins the
+   new commit (`tools/pin-oem-translations.sh` in Drive Assist).
 2. The car makes a patched copy of each listed app, from the copy it has.
    Only the app's text table (`resources.arsc`) changes. The code is not
    touched.
