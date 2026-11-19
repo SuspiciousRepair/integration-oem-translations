@@ -11,16 +11,15 @@ integration of [Drive Assist](https://github.com/SuspiciousRepair/drive_assist)
 
 ## How the car uses it
 
-Nothing is downloaded. Drive Assist builds the text into its helper app, from
-one commit of this repo (`tools/pin-oem-translations.sh` in Drive Assist), so
-a change here reaches cars with the next Drive Assist release.
+On Install, and at each car start while the integration is on, the car asks
+GitHub for the newest commit of `main`. When it is not the one it applied
+before, it downloads `manifest.json` and the files in `apps/` of that commit,
+as one set. With no network it uses the text it kept. So a change merged
+here reaches the cars at their next start.
 
-The car checks two things, and trusts nothing else:
-
-1. **The known patch.** Only the text built into the signed helper app.
-2. **The known file.** Before patching, the car hashes its own copy of each
-   app. Only an apk whose SHA-256 is in `apk_sha256` is patched. Any other
-   build of the app (for example after a system update) is left alone.
+The check that protects the car: before patching, the car hashes its own
+copy of each app. Only an apk whose SHA-256 is in `apk_sha256` is patched.
+Any other build of the app (for example after a system update) is left alone.
 
 Then:
 
@@ -29,7 +28,7 @@ Then:
 - The copy is put in front of the original with a bind mount. The original
   file in `/system` is never changed.
 - **Remove** takes the copies away. A reboot drops them too; the integration
-  makes them again, with the same two checks, while it is on.
+  makes them again, with the same check, while it is on.
 - If a patched app crashes, the car removes that app's copy by itself.
 
 Today the hashes are the apps of system 1111 (`SW0E22H0128H111100000`).
