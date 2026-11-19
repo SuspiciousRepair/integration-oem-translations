@@ -44,7 +44,11 @@ that car, then add the version to the list.
 
 ## Files
 
-- `manifest.json`: the system versions (`systems`), the apps to patch, and the file for each.
+- `manifest.json`: the system versions (`systems`), the apps to patch, the
+  file for each, and `apk_sha256`: the SHA-256 of the factory apk the text was
+  made for (`adb shell sha256sum /system/app/AutoEnergy/AutoEnergy.apk`, with
+  nothing mounted over it). The car hashes its own apk first; an app whose
+  hash is not listed is left untouched.
 - `apps/<package>.json`: one object per language, `{"pt": {"string_name": "text"}, ...}`.
   Each language goes in its own slot: Portuguese in `pt`, English in `en`.
   The default (fallback) slot is never changed. A line the app does not have
