@@ -11,41 +11,32 @@ integration of [Drive Assist](https://github.com/SuspiciousRepair/drive_assist)
 
 ## How the car uses it
 
-1. In Drive Assist, tap **Install**. The car downloads `manifest.json` and the
-   files in `apps/` from this repo, from **one commit pinned in Drive Assist**,
-   and checks the SHA-256 of each file against the hashes pinned there. A
-   file that does not match stops the install, and nothing changes. So a
-   change here reaches cars only with a Drive Assist release that pins the
-   new commit (`tools/pin-oem-translations.sh` in Drive Assist).
-2. The car makes a patched copy of each listed app, from the copy it has.
-   Only the app's text table (`resources.arsc`) changes. The code is not
-   touched.
-3. The copy is put in front of the original with a bind mount. The original
-   file in `/system` is never changed.
-4. **Remove** takes the copies away. A reboot also gives the car its factory
-   text back until the integration puts the copies in front again.
-5. If a patched app crashes, the car removes that app's copy by itself.
+Nothing is downloaded. Drive Assist builds the text into its helper app, from
+one commit of this repo (`tools/pin-oem-translations.sh` in Drive Assist), so
+a change here reaches cars with the next Drive Assist release.
 
-## System versions
+The car checks two things, and trusts nothing else:
 
-The text is made for the apps of one system version. The car applies it only
-when its version (`adb shell getprop ro.build.version.versionname`) is in the
-`systems` list of `manifest.json`, exactly. Today that is:
+1. **The known patch.** Only the text built into the signed helper app.
+2. **The known file.** Before patching, the car hashes its own copy of each
+   app. Only an apk whose SHA-256 is in `apk_sha256` is patched. Any other
+   build of the app (for example after a system update) is left alone.
 
-| Version | `ro.build.version.versionname` |
-| --- | --- |
-| 1111 | `SW0E22H0128H111100000` |
+Then:
 
-On any other version, Install changes nothing. When a car gets a system
-update, the next boot removes the copies and turns the integration off. To add
-a version: pull the three apps from a car on that version, run
-`tools/scan_arsc.py` and `tools/patch_arsc.py` on them, check the screens on
-that car, then add the version to the list.
+- The car makes a patched copy of each known app. Only the app's text table
+  (`resources.arsc`) changes; the code is not touched.
+- The copy is put in front of the original with a bind mount. The original
+  file in `/system` is never changed.
+- **Remove** takes the copies away. A reboot drops them too; the integration
+  makes them again, with the same two checks, while it is on.
+- If a patched app crashes, the car removes that app's copy by itself.
+
+Today the hashes are the apps of system 1111 (`SW0E22H0128H111100000`).
 
 ## Files
 
-- `manifest.json`: the system versions (`systems`), the apps to patch, the
-  file for each, and `apk_sha256`: the SHA-256 of the factory apk the text was
+- `manifest.json`: the apps to patch, the file for each, and `apk_sha256`: the SHA-256 of the factory apk the text was
   made for (`adb shell sha256sum /system/app/AutoEnergy/AutoEnergy.apk`, with
   nothing mounted over it). The car hashes its own apk first; an app whose
   hash is not listed is left untouched.
