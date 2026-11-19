@@ -1,0 +1,8 @@
+{
+  "format": 1,
+  "apps": [
+    { "package": "com.flyme.auto.energy",               "file": "apps/com.flyme.auto.energy.json" },
+    { "package": "com.flyme.auto.connectivitysettings", "file": "apps/com.flyme.auto.connectivitysettings.json" },
+    { "package": "com.flyme.auto.settings",             "file": "apps/com.flyme.auto.settings.json" }
+  ]
+}
