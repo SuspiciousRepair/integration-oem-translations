@@ -22,9 +22,25 @@ integration of [Drive Assist](https://github.com/SuspiciousRepair/drive_assist)
    text back until the integration puts the copies in front again.
 5. If a patched app crashes, the car removes that app's copy by itself.
 
+## System versions
+
+The text is made for the apps of one system version. The car applies it only
+when its version (`adb shell getprop ro.build.version.versionname`) is in the
+`systems` list of `manifest.json`, exactly. Today that is:
+
+| Version | `ro.build.version.versionname` |
+| --- | --- |
+| 1111 | `SW0E22H0128H111100000` |
+
+On any other version, Install changes nothing. When a car gets a system
+update, the next boot removes the copies and turns the integration off. To add
+a version: pull the three apps from a car on that version, run
+`tools/scan_arsc.py` and `tools/patch_arsc.py` on them, check the screens on
+that car, then add the version to the list.
+
 ## Files
 
-- `manifest.json`: the apps to patch, and the file for each.
+- `manifest.json`: the system versions (`systems`), the apps to patch, and the file for each.
 - `apps/<package>.json`: one object per language, `{"pt": {"string_name": "text"}, ...}`.
   Each language goes in its own slot: Portuguese in `pt`, English in `en`.
   The default (fallback) slot is never changed. A line the app does not have

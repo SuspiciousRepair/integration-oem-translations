@@ -1,5 +1,8 @@
 {
   "format": 1,
+  "systems": [
+    "SW0E22H0128H111100000"
+  ],
   "apps": [
     { "package": "com.flyme.auto.energy",               "file": "apps/com.flyme.auto.energy.json" },
     { "package": "com.flyme.auto.connectivitysettings", "file": "apps/com.flyme.auto.connectivitysettings.json" },
