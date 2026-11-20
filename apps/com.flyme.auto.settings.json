@@ -1,16 +1,29 @@
 {
  "pt": {
   "health": "Saudável",
-  "adas_spv_elka_title": "Assistente de Emergência para Permanência na Faixa",
-  "adas_elka_dialog_msg": "Com o Assistente de Emergência para Permanência na Faixa desligado, o sistema não corrige saídas de faixa. Isso pode causar colisão com o meio-fio ou com objetos nas faixas ao lado"
+  "adas_spv_elka_title": "Assistente Emergencial de Permanência em Faixa",
+  "adas_elka_dialog_title": "Desativar assistente emergencial de faixa",
+  "adas_elka_dialog_msg": "Com o Assistente Emergencial de Permanência em Faixa desativado, o sistema não corrigirá desvios de faixa. Há risco de colisão com o meio-fio ou com objetos na faixa ao lado",
+  "adas_lca_dialog_title2": "Desativar Assistente de Permanência em Faixa",
+  "adas_lca_dialog_msg": "Com o Aviso de Saída de Faixa desativado, o sistema não emitirá alertas ao sair da faixa",
+  "adas_alad_warn_dialog_msg": "Com o Aviso de Saída de Faixa desativado, o sistema não emitirá alertas ao sair da faixa",
+  "endurance_milage_show": "Aviso de autonomia",
+  "adas_spv_lka_title": "Assistente de Permanência em Faixa",
+  "adas_spv_lka_mode_intv": "Correção de Saída de Faixa"
  },
  "en": {
-  "health": "Healthy"
+  "health": "Healthy",
+  "adas_spv_elka_title": "Emergency Lane Keeping Assist",
+  "adas_elka_dialog_msg": "When Emergency Lane Keeping Assist is off, the system cannot correct lane departures. This may cause a collision with the curb or with objects in the next lane"
  },
  "es": {
-  "health": "En buen estado"
+  "health": "En buen estado",
+  "adas_spv_elka_title": "Asistente de emergencia de mantenimiento de carril",
+  "adas_elka_dialog_title": "Desactivar asistente de emergencia de carril",
+  "adas_spv_lka_mode_intv": "Asistencia de salida de carril"
  },
  "th": {
-  "health": "สภาพดี"
+  "health": "สภาพดี",
+  "adas_lca_dialog_title2": "ปิดระบบช่วยคุมรถให้อยู่ในเลน"
  }
 }
