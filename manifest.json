@@ -21,6 +21,13 @@
       "apk_sha256": [
         "84741dbe56bace0d395eb25bf23484b94df6bfd10e1f658c83d26cfdc1ad5867"
       ]
+    },
+    {
+      "package": "com.android.packageinstaller",
+      "file": "apps/com.android.packageinstaller.json",
+      "apk_sha256": [
+        "503965455c518fb96109f13f1d4f57246c19e9df571e74750f23676fb2dabd03"
+      ]
     }
   ]
 }
